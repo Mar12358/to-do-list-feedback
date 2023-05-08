@@ -1,15 +1,15 @@
 import './style.css';
 import {
-  addLocalStorage,
   addTaskToHTML,
   createFrame,
   Task,
   editTask,
+  populateHTML,
+  createEmptyUl,
 } from './modules/functions.js';
 import { addCheckboxListenerOnLoad, clearCompleted } from './modules/check_box.js';
 
 const body = document.getElementsByTagName('body')[0];
-const container = document.querySelector('.to-do-list');
 
 createFrame();
 const arrayOfTasks = [];
@@ -32,12 +32,9 @@ body.appendChild(clearButton);
 
 document.addEventListener('DOMContentLoaded', () => {
   if (localStorage.length !== 0) {
-    const { ul, arrayOfTasks: localStorageArray } = addLocalStorage();
-    arrayOfTasks.push(...localStorageArray);
-    container.appendChild(ul);
+    populateHTML(arrayOfTasks);
   } else {
-    const ul = document.createElement('ul');
-    container.appendChild(ul);
+    createEmptyUl();
   }
   const threeDots = document.querySelectorAll('.menu-img');
   threeDots.forEach((threeDot) => {
