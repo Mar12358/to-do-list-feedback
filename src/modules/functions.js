@@ -162,3 +162,15 @@ export const addTaskToHTML = (task, arrayOfTasks) => {
     editTask(event.target.parentNode, arrayOfTasks);
   });
 };
+
+const container = document.querySelector('.to-do-list');
+export const populateHTML = (arrayOfTasks) => {
+  const { ul, arrayOfTasks: localStorageArray } = addLocalStorage();
+  arrayOfTasks.push(...localStorageArray);
+  container.appendChild(ul);
+};
+
+export const createEmptyUl = () => {
+  const ul = document.createElement('ul');
+  container.appendChild(ul);
+};
