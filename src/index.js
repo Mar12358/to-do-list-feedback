@@ -40,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(ul);
   }
   const threeDots = document.querySelectorAll('.menu-img');
-  for (let i = 0; i < threeDots.length; i += 1) {
-    threeDots[i].addEventListener('click', (event) => {
+  threeDots.forEach((threeDot) => {
+    threeDot.addEventListener('click', (event) => {
       editTask(event.target.parentNode, arrayOfTasks);
     });
-  }
+  });
   const checkboxes = document.querySelectorAll('input[type=checkbox]');
   addCheckboxListenerOnLoad(checkboxes, arrayOfTasks);
 
