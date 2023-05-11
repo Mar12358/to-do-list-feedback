@@ -1,10 +1,11 @@
+/**
+ * @jest-environment jsdom
+ */
+
 /* import menuImgSrc from '../menu.png'; */
 /* import enterImgSrc from '../enter.png';
 import refreshImgSrc from '../refresh.png';
 import trashImgSrc from '../trash.png'; */
-/**
- * @jest-environment jsdom
- */
 import { addCheckboxListenerOnLoad } from './check_box.js';
 
 export const createFrame = () => {
@@ -61,6 +62,7 @@ export const addLocalStorage = () => {
     const menuImg = document.createElement('img');
     menuImg.src = './src/menu.png';
     menuImg.className = 'menu-img';
+    /* menuImg.src = menuImgSrc; */
     li.appendChild(menuImg);
     const trashImg = document.createElement('img');
     /*     trashImg.src = trashImgSrc; */
@@ -97,7 +99,6 @@ const updateLocalStorage = (id, value, completed) => {
 
 export const deleteElement = (li, array) => {
   const input = li.querySelector('.added-task');
-  console.log(input.id);
   const id = parseInt(input.id, 10);
   for (let i = id + 1; i <= array.length; i += 1) {
     const nextElement = document.getElementById((i).toString());

@@ -2,6 +2,7 @@
  * @jest-environment jsdom
  */
 import { addTask, deleteElement } from './functions.js';
+/* import menuImgSrc from '../__mocks__/menu.png'; */
 
 test('Add one new item to the list', () => {
   document.body.innerHTML = '<div>'
