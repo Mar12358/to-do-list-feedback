@@ -108,9 +108,7 @@ export const deleteElement = (li, array) => {
   array.splice(id - 1, 1);
   localStorage.setItem('tasks', JSON.stringify(array));
   li.querySelector('.added-task').removeEventListener('click', deleteElement);
-  /* document.querySelector('li input.added-task').removeEventListener('click', deleteElement); */
   li.remove();
-  /* document.querySelector('li input.added-task').parentNode.parentNode.remove(); */
 };
 
 export const editValidation = (e, array) => {
@@ -127,10 +125,12 @@ export const editValidation = (e, array) => {
     const completed = input.classList.contains('line-through');
     updateLocalStorage(id.toString(), input.value, completed);
     array[id - 1].description = input.value;
+
     input.removeEventListener('keydown', editValidation);
     trash.removeEventListener('click', deleteElement);
   }
 };
+
 export const editTask = (clickedElement, array) => {
   const li = clickedElement;
   const input = li.querySelector('.added-task');
@@ -143,21 +143,6 @@ export const editTask = (clickedElement, array) => {
   input.classList.add('on-focus');
   input.focus();
   input.setSelectionRange(input.value.length, input.value.length);
-  /*   const id = parseInt(input.id, 10); */
-
-  /*   const editValidation = (e) => {
-    if (e.key === 'Enter' && input.value !== '') {
-      trash.classList.toggle('hidden');
-      editButton.classList.toggle('hidden');
-      input.setAttribute('readonly', true);
-      li.classList.remove('focused-li');
-      const completed = input.classList.contains('line-through');
-      updateLocalStorage(id.toString(), input.value, completed);
-      array[id - 1].description = input.value;
-      input.removeEventListener('keydown', editValidation);
-      trash.removeEventListener('click', deleteElement);
-    }
-  }; */
 
   input.addEventListener('keydown', (event) => editValidation(event, array));
   trash.addEventListener('click', (event) => deleteElement(event.target.parentNode, array));
