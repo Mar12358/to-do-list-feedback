@@ -1,6 +1,6 @@
 import './style.css';
 import {
-  addTaskToHTML,
+  addTask,
   createFrame,
   Task,
   editTask,
@@ -20,7 +20,7 @@ input.addEventListener('keydown', (e) => {
     const task = Task.create(input.value, (arrayOfTasks.length + 1).toString());
     e.preventDefault();
     arrayOfTasks.push(task);
-    addTaskToHTML(task, arrayOfTasks);
+    addTask(task, arrayOfTasks);
     localStorage.setItem('tasks', JSON.stringify(arrayOfTasks));
     input.value = '';
   }
