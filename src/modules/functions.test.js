@@ -4,7 +4,7 @@
 import { addTask, deleteElement } from './functions.js';
 /* import menuImgSrc from '../__mocks__/menu.png'; */
 
-describe ('Compiling addTask and deleteElement functions go as expected', () => {
+describe('Compiling addTask and deleteElement functions go as expected', () => {
   test('Add one new item to the list', () => {
     document.body.innerHTML = '<div>'
     + '  <ul id="list"><li></li></ul>'
@@ -38,6 +38,3 @@ describe ('Compiling addTask and deleteElement functions go as expected', () => 
     expect(list).toHaveLength(3);
   });
 });
-
-
-
