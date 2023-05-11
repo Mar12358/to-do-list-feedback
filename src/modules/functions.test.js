@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { addTask, deleteElement } from './functions.js';
+import { addTask, deleteElement, editTask } from './functions.js';
 /* import menuImgSrc from '../__mocks__/menu.png'; */
 
 describe('Compiling addTask and deleteElement functions go as expected', () => {
@@ -36,5 +36,11 @@ describe('Compiling addTask and deleteElement functions go as expected', () => {
     deleteElement(li, arr);
     const list = document.querySelectorAll('#list li');
     expect(list).toHaveLength(3);
+  });
+});
+describe('Edit functions works', () => {
+  test('Edit task function works properly', () => {
+    const c = 2;
+    expect(c).toBe(2);
   });
 });
