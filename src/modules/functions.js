@@ -4,6 +4,7 @@ import refreshImgSrc from '../refresh.png';
 import trashImgSrc from '../trash.png';
 import { addCheckboxListenerOnLoad } from './check_box.js';
 
+const { test } = require('node:test');
 export const createFrame = () => {
   const h1Container = document.querySelector('.h1-container');
   const refreshImg = document.createElement('img');
@@ -176,4 +177,8 @@ export const populateHTML = (arrayOfTasks) => {
 export const createEmptyUl = () => {
   const ul = document.createElement('ul');
   container.appendChild(ul);
+};
+
+module.exports = {
+  addTask, editTask, updateLocalStorage, addLocalStorage,
 };
