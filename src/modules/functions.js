@@ -113,6 +113,24 @@ export const deleteElement = (li, array) => {
   /* document.querySelector('li input.added-task').parentNode.parentNode.remove(); */
 };
 
+export const editValidation = (e, array) => {
+  const li = e.target.parentNode.parentNode;
+  const input = li.querySelector('.added-task');
+  const trash = li.querySelector('.trash-img');
+  const id = parseInt(input.id, 10);
+  const editButton = li.querySelector('.menu-img');
+  if (e.key === 'Enter' && input.value !== '') {
+    /* trash.classList.toggle('hidden'); */
+    editButton.classList.toggle('hidden');
+    input.setAttribute('readonly', true);
+    li.classList.remove('focused-li');
+    const completed = input.classList.contains('line-through');
+    updateLocalStorage(id.toString(), input.value, completed);
+    array[id - 1].description = input.value;
+    input.removeEventListener('keydown', editValidation);
+    trash.removeEventListener('click', deleteElement);
+  }
+};
 export const editTask = (clickedElement, array) => {
   const li = clickedElement;
   const input = li.querySelector('.added-task');
@@ -125,9 +143,9 @@ export const editTask = (clickedElement, array) => {
   input.classList.add('on-focus');
   input.focus();
   input.setSelectionRange(input.value.length, input.value.length);
-  const id = parseInt(input.id, 10);
+  /*   const id = parseInt(input.id, 10); */
 
-  const handleEnterKey = (e) => {
+  /*   const editValidation = (e) => {
     if (e.key === 'Enter' && input.value !== '') {
       trash.classList.toggle('hidden');
       editButton.classList.toggle('hidden');
@@ -136,12 +154,12 @@ export const editTask = (clickedElement, array) => {
       const completed = input.classList.contains('line-through');
       updateLocalStorage(id.toString(), input.value, completed);
       array[id - 1].description = input.value;
-      input.removeEventListener('keydown', handleEnterKey);
+      input.removeEventListener('keydown', editValidation);
       trash.removeEventListener('click', deleteElement);
     }
-  };
+  }; */
 
-  input.addEventListener('keydown', handleEnterKey);
+  input.addEventListener('keydown', (event) => editValidation(event, array));
   trash.addEventListener('click', (event) => deleteElement(event.target.parentNode, array));
 };
 
