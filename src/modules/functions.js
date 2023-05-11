@@ -1,14 +1,19 @@
-import menuImgSrc from '../menu.png';
-import enterImgSrc from '../enter.png';
+/**
+ * @jest-environment jsdom
+ */
+
+/* import menuImgSrc from '../menu.png'; */
+/* import enterImgSrc from '../enter.png';
 import refreshImgSrc from '../refresh.png';
-import trashImgSrc from '../trash.png';
+import trashImgSrc from '../trash.png'; */
 import { addCheckboxListenerOnLoad } from './check_box.js';
 
 export const createFrame = () => {
   const h1Container = document.querySelector('.h1-container');
   const refreshImg = document.createElement('img');
   const container = document.querySelector('.to-do-list');
-  refreshImg.src = refreshImgSrc;
+  /* refreshImg.src = refreshImgSrc; */
+  refreshImg.src = 'image';
   refreshImg.className = 'refresh-img';
   h1Container.appendChild(refreshImg);
   const form = document.createElement('form');
@@ -21,7 +26,8 @@ export const createFrame = () => {
   inputLine.className = 'input-line';
   inputLine.appendChild(input);
   const enterImg = document.createElement('img');
-  enterImg.src = enterImgSrc;
+  /*   enterImg.src = enterImgSrc; */
+  enterImg.src = 'ent';
   enterImg.className = 'enter-img';
 
   inputLine.appendChild(enterImg);
@@ -54,11 +60,13 @@ export const addLocalStorage = () => {
     content.appendChild(inp);
     li.appendChild(content);
     const menuImg = document.createElement('img');
-    menuImg.src = menuImgSrc;
+    menuImg.src = './src/menu.png';
     menuImg.className = 'menu-img';
+    /* menuImg.src = menuImgSrc; */
     li.appendChild(menuImg);
     const trashImg = document.createElement('img');
-    trashImg.src = trashImgSrc;
+    /*     trashImg.src = trashImgSrc; */
+    trashImg.src = 'as';
     trashImg.className = 'trash-img hidden';
     li.appendChild(trashImg);
 
@@ -89,6 +97,22 @@ const updateLocalStorage = (id, value, completed) => {
   localStorage.setItem('tasks', JSON.stringify(storedTasks));
 };
 
+export const deleteElement = (li, array) => {
+  const input = li.querySelector('.added-task');
+  const id = parseInt(input.id, 10);
+  for (let i = id + 1; i <= array.length; i += 1) {
+    const nextElement = document.getElementById((i).toString());
+    nextElement.id = (i - 1).toString();
+    array[i - 1].index = (nextElement.id).toString();
+  }
+  array.splice(id - 1, 1);
+  localStorage.setItem('tasks', JSON.stringify(array));
+  li.querySelector('.added-task').removeEventListener('click', deleteElement);
+  /* document.querySelector('li input.added-task').removeEventListener('click', deleteElement); */
+  li.remove();
+  /* document.querySelector('li input.added-task').parentNode.parentNode.remove(); */
+};
+
 export const editTask = (clickedElement, array) => {
   const li = clickedElement;
   const input = li.querySelector('.added-task');
@@ -102,17 +126,6 @@ export const editTask = (clickedElement, array) => {
   input.focus();
   input.setSelectionRange(input.value.length, input.value.length);
   const id = parseInt(input.id, 10);
-  const deleteElement = () => {
-    for (let i = id + 1; i <= array.length; i += 1) {
-      const nextElement = document.getElementById((i).toString());
-      nextElement.id = (i - 1).toString();
-      array[i - 1].index = (nextElement.id).toString();
-    }
-    array.splice(id - 1, 1);
-    localStorage.setItem('tasks', JSON.stringify(array));
-    trash.removeEventListener('click', deleteElement);
-    li.remove();
-  };
 
   const handleEnterKey = (e) => {
     if (e.key === 'Enter' && input.value !== '') {
@@ -129,10 +142,10 @@ export const editTask = (clickedElement, array) => {
   };
 
   input.addEventListener('keydown', handleEnterKey);
-  trash.addEventListener('click', deleteElement);
+  trash.addEventListener('click', (event) => deleteElement(event.target.parentNode, array));
 };
 
-export const addTaskToHTML = (task, arrayOfTasks) => {
+export const addTask = (task, arrayOfTasks) => { // Impure Function, because of ArrayOfTasks?
   const ul = document.querySelector('ul');
   const li = document.createElement('li');
   const checkBox = document.createElement('input');
@@ -149,10 +162,10 @@ export const addTaskToHTML = (task, arrayOfTasks) => {
   content.appendChild(inp);
   li.appendChild(content);
   const menuImg = document.createElement('img');
-  menuImg.src = menuImgSrc;
+  /*   menuImg.src = menuImgSrc; */
   menuImg.className = 'menu-img';
   const trashImg = document.createElement('img');
-  trashImg.src = trashImgSrc;
+  /*   trashImg.src = trashImgSrc; */
   trashImg.classList = 'trash-img hidden';
   li.appendChild(menuImg);
   li.appendChild(trashImg);
@@ -163,14 +176,15 @@ export const addTaskToHTML = (task, arrayOfTasks) => {
   });
 };
 
-const container = document.querySelector('.to-do-list');
 export const populateHTML = (arrayOfTasks) => {
+  const container = document.querySelector('.to-do-list');
   const { ul, arrayOfTasks: localStorageArray } = addLocalStorage();
   arrayOfTasks.push(...localStorageArray);
   container.appendChild(ul);
 };
 
 export const createEmptyUl = () => {
+  const container = document.querySelector('.to-do-list');
   const ul = document.createElement('ul');
   container.appendChild(ul);
 };

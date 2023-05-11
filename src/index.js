@@ -1,6 +1,6 @@
 import './style.css';
 import {
-  addTaskToHTML,
+  addTask,
   createFrame,
   Task,
   editTask,
@@ -17,11 +17,11 @@ const arrayOfTasks = [];
 const input = document.querySelector('input');
 input.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && input.value !== '') {
-    e.preventDefault();
     const task = Task.create(input.value, (arrayOfTasks.length + 1).toString());
+    e.preventDefault();
     arrayOfTasks.push(task);
+    addTask(task, arrayOfTasks);
     localStorage.setItem('tasks', JSON.stringify(arrayOfTasks));
-    addTaskToHTML(task, arrayOfTasks);
     input.value = '';
   }
 });
