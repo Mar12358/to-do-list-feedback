@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { clearCompleted, addCheckboxListenerOnLoad } from './check_box.js';
+import { clearCompleted } from './check_box.js';
 
 describe('Clear all and Update Status functions work', () => {
   test('Clear all Completed Button works fine', () => {

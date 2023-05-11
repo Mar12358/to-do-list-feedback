@@ -16,6 +16,7 @@ export const clearCompleted = (arrayOfTasks) => {
   for (let i = 0; i < incompleteTasks.length; i += 1) {
     incompleteTasks[i].index = i + 1;
   }
+  arrayOfTasks = incompleteTasks;
   localStorage.setItem('tasks', JSON.stringify(incompleteTasks));
   window.location.reload(true);
 };

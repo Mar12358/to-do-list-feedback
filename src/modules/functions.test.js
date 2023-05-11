@@ -38,17 +38,17 @@ describe('Compiling addTask and deleteElement functions go as expected', () => {
     expect(list).toHaveLength(3);
   });
 });
+
 describe('Edit functions works', () => {
   test('Edit task function works properly', () => {
     document.body.innerHTML = '<div>'
-    + '  <ul id="list"><li class="focused-li"><div class="content"><input type="checkbox"><input type="text" class="added-task uneditable on-focus" id="1">Modified Description</div><img src="./src/menu.png" class="menu-img hidden"><img src="as" class="trash-img"></li><li class="focused-li"><div class="content"><input type="checkbox"><input type="text" class="added-task uneditable on-focus" id="2"></div><img src="./src/menu.png" class="menu-img hidden"><img src="as" class="trash-img"></li><li class="focused-li"><div class="content"><input type="checkbox"><input type="text" class="added-task uneditable on-focus" id="3"></div><img src="./src/menu.png" class="menu-img hidden"><img src="as" class="trash-img"></li><li class="focused-li"><div class="content"><input type="checkbox"><input type="text" class="added-task uneditable on-focus" id="4"></div><img src="./src/menu.png" class="menu-img hidden"><img src="as" class="trash-img"></li></ul>'
+    + '  <ul id="list"><li class="focused-li"><div class="content"><input type="checkbox"><input type="text" class="added-task" id="1" value="Modified Value"></div><img src="./src/menu.png" class="menu-img hidden"><img src="as" class="trash-img"></li><li class="focused-li"><div class="content"><input type="checkbox"><input type="text" class="added-task uneditable on-focus" id="2"></div><img src="./src/menu.png" class="menu-img hidden"><img src="as" class="trash-img"></li><li class="focused-li"><div class="content"><input type="checkbox"><input type="text" class="added-task uneditable on-focus" id="3"></div><img src="./src/menu.png" class="menu-img hidden"><img src="as" class="trash-img"></li><li class="focused-li"><div class="content"><input type="checkbox"><input type="text" class="added-task uneditable on-focus" id="4"></div><img src="./src/menu.png" class="menu-img hidden"><img src="as" class="trash-img"></li></ul>'
     + '</div>';
-    /* const li = document.querySelector('.added-task').parentNode.parentNode; */
+    const mockElementDOM = document.querySelector('.added-task');
     const e = {
       key: 'Enter',
-      target: document.querySelector('.added-task'),
+      target: mockElementDOM,
     };
-
     const arr = [
       {
         description: 'Description1',
@@ -67,9 +67,8 @@ describe('Edit functions works', () => {
         index: 4,
       },
     ];
+
     editValidation(e, arr);
-    /* expect(arr[1].description).toBe('Modified Description'); */
-    const c = 2;
-    expect(c).toBe(2);
+    expect(arr[0].description).toBe('Modified Value');
   });
 });
