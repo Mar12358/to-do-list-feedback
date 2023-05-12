@@ -19,4 +19,5 @@ export const clearCompleted = (arrayOfTasks) => {
   arrayOfTasks = incompleteTasks;
   localStorage.setItem('tasks', JSON.stringify(incompleteTasks));
   window.location.reload(true);
+  return arrayOfTasks;
 };
